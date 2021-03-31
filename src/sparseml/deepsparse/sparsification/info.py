@@ -12,19 +12,26 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""
-Tooling to help train, test, and optimize models for better performance
-"""
+import logging
 
-# flake8: noqa
+from sparseml.sparsification import SparsificationInfo
 
-from .base import (
-    Framework,
-    check_version,
-    detect_framework,
-    execute_in_sparseml_framework,
-)
 
-# be sure to import all logging first and at the root
-# this keeps other loggers in nested files creating from the root logger setups
-from .log import *
+__all__ = ["sparsification_info"]
+
+
+_LOGGER = logging.getLogger(__name__)
+
+
+def sparsification_info() -> SparsificationInfo:
+    """
+    Load the available setup for sparsifying model within deepsparse.
+
+    :return: The sparsification info for the deepsparse framework
+    :rtype: SparsificationInfo
+    """
+    _LOGGER.debug("getting sparsification info for deepsparse")
+    info = SparsificationInfo(modifiers=[])
+    _LOGGER.info("retrieved sparsification info for deepsparse: %s", info)
+
+    return info
